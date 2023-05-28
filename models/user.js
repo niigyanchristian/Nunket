@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     messages:[]
 });
 
-const User = mongoose.models.User || new mongoose.model("User", userSchema);
+const User = new mongoose.model("User", userSchema);
+// const User = mongoose.models.User || new mongoose.model("User", userSchema);
 
 module.exports = User;
