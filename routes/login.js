@@ -14,7 +14,7 @@ post(async (req,res)=>{
             if(found){
                 if(found.password == password){
                     const token = jwt.sign(
-                        {found},
+                        {client},
                         process.env.TOKEN_KEY,
                       );
                     res.status(200).json(JSON.stringify(token));  
