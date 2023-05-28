@@ -19,9 +19,9 @@ const { Server } = require("socket.io");
 const Transaction = require('./models/transactions');
 const io = new Server(server);
 
-console.log('====================================');
+console.log('CONNECTING TO DATABASE...');
 MongoDB();
-console.log('====================================');
+console.log('DATABASE CONNECTED');
 
 
 

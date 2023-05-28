@@ -7,16 +7,18 @@ const router = express.Router();
 router.route('/').
 post(async (req,res)=>{
     let {email,password} = req.body;
-    User.findOne({email:email},(err,found)=>{
+    User.findOne({email:email},(err,client)=>{
         if(err){
             res.status(400).send(err.message);
         }else{
-            if(found){
-                if(found.password == password){
+            if(client){
+                if(client.password == password){
                     const token = jwt.sign(
                         {client},
                         process.env.TOKEN_KEY,
                       );
+                      console.log(' Client',client);
+                      console.log('token',token);
                     res.status(200).json(JSON.stringify(token));  
                 }else{
                     res.status(401).send('wrong password');
