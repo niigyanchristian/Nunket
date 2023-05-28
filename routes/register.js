@@ -8,8 +8,8 @@ const router = express.Router();
 
 router.route('/')
 .post(async (req,res)=>{
-    console.log("entered");
     let {name,password,email} = req.body;
+    console.log("entered",name,password,email);
    
     // console.log(encryptedPassword);
     User.findOne({email:email}, (err,user)=>{
@@ -24,6 +24,7 @@ router.route('/')
                     email: email,
                     password:password,
                 });
+                console.log("user model->",client)
                 // Create token
                 const token = jwt.sign(
                     {client},
