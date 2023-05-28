@@ -14,7 +14,8 @@ router.route('/')
     // console.log(encryptedPassword);
     User.findOne({email:email}, (err,user)=>{
         if(err){
-            res.send(err.message);
+            console.log('err.message->',err.message)
+            // res.send(err.message);
         }else{
             if(user){
                 res.status(403).send("User with the email( "+email+" ) alredy exist");
