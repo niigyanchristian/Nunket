@@ -16,12 +16,8 @@ get((req,res)=>{
         }
     })
 })
-.post(async (req,res)=>{
-    console.log("entered list");
-    let {title,images,price,category,userId,latitude,longitude} = req.body;
-   
+.post(async (req,res)=>{   
     const list = new List(req.body);
-    console.log(list);
     list.save((err)=>{
         if(!err){
             res.send(list)
@@ -30,6 +26,17 @@ get((req,res)=>{
         }
     })
 });
+
+router.route('/:id').
+post((req,res)=>{
+    const {id} = req.params;
+    List.findByIdAndDelete(id).
+    then(data=>{
+        res.send(data);
+    })
+
+})
+
 
 module.exports = router;
 

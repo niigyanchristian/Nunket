@@ -17,7 +17,6 @@ router.route('/:id').get(async(req,res)=>{
         await Transaction.create({amount,payerId,refId});
         updateAccount(amount,receiverId,payerId) ? res.send("Transaction went on successfuly"): null
     }
-    console.log("Transuction!!!",amount,payerId,receiverId,status)
 });
 
 module.exports = router;

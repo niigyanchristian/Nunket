@@ -5,7 +5,7 @@ const clientGet =(id,io)=>{
         if(!err){
           io.emit("services",{data:find.reverse(),status:200});
         }else{
-          console.log("there is an error");
+          console.log("there is an error->"+err.message);
         }
       })
 }
@@ -17,23 +17,23 @@ const clientPost =(data,io)=>{
         if(!err){
           io.emit("orders",{data:find.reverse(),status:200});
         }else{
-          console.log("there is an error");
+          console.log("there is an error->"+err.message);
         }
       })
       console.log("done!");
     }else{
-      console.log("there is an error");
+      console.log("there is an error->"+err.message);
     }
   })
 }
 const clientUpdate =(serviceId,clientId,io)=>{
   Service.findByIdAndUpdate(serviceId,{watched:true},(err,find)=>{
-    console.log(find);
+    
     Service.find({clientId:clientId},(err,find)=>{
       if(!err){
         io.emit("services",{data:find.reverse(),status:200});
       }else{
-        console.log("there is an error");
+        console.log("there is an error->"+err.message);
       }
     })
   })
@@ -46,7 +46,7 @@ const ordersGet =(id,io)=>{
       if(!err){
         io.emit("orders",{data:find.filter((service)=>service.status !== "Served").reverse(),status:200});
       }else{
-        console.log("there is an error");
+        console.log("there is an error->"+err.message);
       }
     })
 }
@@ -58,7 +58,7 @@ const ordersUpdate =(serviceId,shopId,status,io)=>{
         if(!err){
           io.emit("orders",{data:find.reverse(),status:200});
         }else{
-          console.log("there is an error");
+          console.log("there is an error->"+err.message);
         }
       })
     }

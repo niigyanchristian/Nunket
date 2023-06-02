@@ -17,6 +17,7 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const Transaction = require('./models/transactions');
+const ErrorMeassaging = require('./models/error');
 const io = new Server(server);
 
 console.log('CONNECTING TO DATABASE...');
@@ -47,7 +48,6 @@ io.on('connection', (socket) => {
       }
     });
     socket.on("orders",async msg=>{
-
         const getTransactions=async ()=>{
           const transactions = await Transaction.find()
           const orders = transactions.filter(item => item.served === false);
@@ -59,11 +59,16 @@ io.on('connection', (socket) => {
       }
         if(msg.method === "POST"){
           const {item} = msg.body;
-          console.log(item)
           await Transaction.findByIdAndUpdate(item._id,{served:true});
           getTransactions();
       }
     });
+
+    socket.on("errors",async msg=>{
+      await ErrorMeassaging.create(msg.body);        
+    });
+
+
    
 
   });
@@ -71,6 +76,6 @@ io.on('connection', (socket) => {
 
 
 
-server.listen(process.env.PORT ||3000, () => {
-    console.log("ChatApp Backend Is Running On Port 3000")
+server.listen(process.env.PORT, () => {
+    console.log(`Nunket Backend Is Running On Port ${process.env.PORT}`)
   });

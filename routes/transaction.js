@@ -12,9 +12,7 @@ const router = express.Router();
 router.route('/:id').
 get((req,res)=>{
     let userid = req.params.id;
-    console.log('l');
    User.findById(userid,(err,find)=>{
-    console.log(find);
     if(!err){
         if(find){
                 res.status(200).send(find.transactionDetails); 

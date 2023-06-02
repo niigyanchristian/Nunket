@@ -25,5 +25,5 @@ const listSchema = new mongoose.Schema({
     },
 });
 
-const List = new mongoose.model("List",listSchema);
+const List = mongoose.models.List || new mongoose.model("List",listSchema);
 module.exports = List;

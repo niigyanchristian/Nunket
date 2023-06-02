@@ -7,7 +7,6 @@ const router = express.Router();
 router.route('/').
 post(async (req,res)=>{
     let {email,password} = req.body;
-    console.log("Credentials->",email,password)
     User.findOne({email:email},(err,client)=>{
         if(err){
             res.status(400).send(err.message);
@@ -18,8 +17,7 @@ post(async (req,res)=>{
                         {client},
                         process.env.TOKEN_KEY,
                       );
-                      console.log(' Client',client);
-                      console.log('token',token);
+                      
                     res.status(200).json(JSON.stringify(token));  
                 }else{
                     res.status(401).send('wrong password');

@@ -42,7 +42,7 @@ const createAccount= async(userId)=>{
         // Check if account doesn't exit before creating 
         const account = await Account.findOne({userId});
         if(!account){
-            console.log(await Account.create({userId}));
+            await Account.create({userId});
         }
     } catch (error) {
         console.log('error in AccountFunction', error)
@@ -53,7 +53,6 @@ const getAccountDetails = async(userId)=>{
     try {
         const account = await Account.findOne({userId});
         if(account){
-            console.log("SHOP ACCOUNT:",account);
             return account;
         }
 
