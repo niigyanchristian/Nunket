@@ -9,6 +9,7 @@ const transactionSchema =new mongoose.Schema({
         type:Boolean,
         default:false
     },
+    coffinImage:String,
     amount:String,
     refId:String,
 })

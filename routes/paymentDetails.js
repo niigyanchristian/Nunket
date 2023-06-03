@@ -11,10 +11,9 @@ router.route('/:id').get(async(req,res)=>{
         res.send(account);
     }
 }).post(async (req,res)=>{
-    const {amount,payerId,receiverId,status,refId}=req.body;
-
+    const {amount,payerId,receiverId,status,refId,coffinImage}=req.body;
     if(status == 'success'){
-        await Transaction.create({amount,payerId,refId});
+        await Transaction.create({amount,payerId,refId,coffinImage});
         updateAccount(amount,receiverId,payerId) ? res.send("Transaction went on successfuly"): null
     }
 });
